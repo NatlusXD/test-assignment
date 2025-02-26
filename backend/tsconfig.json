@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "ES2015",
+            "DOM"
+        ],
+    }
+}

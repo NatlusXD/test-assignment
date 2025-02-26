@@ -1,0 +1,64 @@
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Заполняет весь экран */
+    background: #ede7f6;
+    overflow: auto; /* Добавляет прокрутку, если контент слишком большой */
+    padding: 20px; /* Добавляет немного отступа */
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    max-height: 90vh; /* Ограничивает высоту формы */
+    overflow-y: auto; /* Добавляет вертикальную прокрутку */
+  }
+  
+  .input-label,
+  .checkbox-label,
+  .radio-label,
+  .dropdown-label {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .input-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .dropdown {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .buttons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .next {
+    padding: 10px;
+    border-radius: 5px;
+    width: 75%;
+    border: none;
+    cursor: pointer;
+    background: #673ab7;
+    color: white;
+  }
+  
+  .next:hover {
+    background: #5e35b1;
+  }
+  
