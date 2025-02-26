@@ -8,7 +8,7 @@ export class TransactionsService {
   constructor(
     @InjectRepository(Transaction)
     private transactionsRepository: Repository<Transaction>,
-  ) { }
+  ) {}
 
   create(transactionData: Partial<Transaction>) {
     const transaction = this.transactionsRepository.create(transactionData);
