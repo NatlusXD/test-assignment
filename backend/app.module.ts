@@ -14,6 +14,8 @@ import { DataSource } from 'typeorm';
       database: 'EXPENSES',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       options: { trustServerCertificate: true },
+      synchronize: true,
+      logging: true
     }),
     TransactionsModule,
   ],

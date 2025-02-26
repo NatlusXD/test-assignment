@@ -1,44 +1,57 @@
 import React, { useState } from "react";
 import "./TransactionForm.css";
 
-const ExpenseForm = () => {
-  const [date, setDate] = useState("");
-  const [amount, setAmount] = useState("");
+const TransactionForm = () => {
+  const [dateTime, setDateTime] = useState("");
+  const [sum, setSum] = useState("");
   const [category, setCategory] = useState("Food");
   const [comment, setComment] = useState("");
+  const [author, setAuthor] = useState("Guest");
 
   const categories = ["Food", "Transport", "Entertainment"];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const expense = { date, amount: parseFloat(amount), category, comment };
+    const transaction = {
+      dateTime,
+      sum: parseFloat(sum),
+      category,
+      comment,
+      author,
+    };
 
-    const response = await fetch("http://localhost:5000/api/expenses", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(expense),
-    });
+    try {
+      const response = await fetch("http://localhost:5000/api/transactions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(transaction),
+      });
 
-    if (response.ok) {
-      alert("Expense added successfully!");
-      setDate("");
-      setAmount("");
+      if (!response.ok) {
+        throw new Error("Error adding transaction");
+      }
+
+      alert("Transaction added successfully!");
+      setDateTime("");
+      setSum("");
       setCategory("Food");
       setComment("");
-    } else {
-      alert("Error adding expense");
+      setAuthor("Guest");
+    } catch (error) {
+      alert("Failed to add transaction");
+      console.error("Error:", error);
     }
   };
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="form">
-        <label className="input-label">Date:</label>
-        <input type="date" className="input-field" value={date} onChange={(e) => setDate(e.target.value)} required />
+        <label className="input-label">Date & Time:</label>
+        <input type="datetime-local" className="input-field" value={dateTime} onChange={(e) => setDateTime(e.target.value)} required />
 
         <label className="input-label">Amount:</label>
-        <input type="number" className="input-field" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+        <input type="number" className="input-field" value={sum} onChange={(e) => setSum(e.target.value)} required />
 
         <label className="dropdown-label">Category:</label>
         <select className="dropdown" value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -50,12 +63,15 @@ const ExpenseForm = () => {
         <label className="input-label">Comment:</label>
         <textarea className="input-field" value={comment} onChange={(e) => setComment(e.target.value)} />
 
+        <label className="input-label">Author:</label>
+        <input type="text" className="input-field" value={author} onChange={(e) => setAuthor(e.target.value)} required />
+
         <div className="buttons">
-          <button type="submit" className="next">Add Expense</button>
+          <button type="submit" className="next">Add Transaction</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default ExpenseForm;
+export default TransactionForm;
